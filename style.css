@@ -5,15 +5,23 @@ body {
     height: 90vh;
     margin: 0;
     background: white;
+    font-family: 'Open Sans', sans-serif;
+    background-image: url('');
 }
 
 .card {
-    background: #eaa;
+    background: #eaad0e;
+    color: white;
     padding: 3em;
     border-radius: 25px;
     width: 100%;
     max-width: 420px;
     margin: 2em;
-    
-
 }
+
+.search {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
