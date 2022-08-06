@@ -6,7 +6,10 @@ searchButton.addEventListener("click", function () {
     var searchTerm = document.querySelector(".weather-search").value
     console.log(searchTerm);
     cityWeather(searchTerm);
-
+    var localS = JSON.parse(localStorage.getItem("weatherAPI")) || []
+    localS.push(searchTerm)
+    localStorage.setItem("weatherAPI", JSON.stringify(localS))
+    displayLocalS()
 })
 
 
@@ -41,7 +44,7 @@ function cityWeather(city) {
                 `
                 var fiveHTML = ""
                 for (let i = 1; i < 6; i++) {
-                                    fiveHTML += `
+                    fiveHTML += `
                                     <div class="card" style="width: 18rem;">
                 <img src="https://openweathermap.org/img/wn/${data.daily[i].weather[0].icon}@2x.png" class="card-img-top" alt="...">
                 <div class="card-body">
@@ -63,4 +66,14 @@ function cityWeather(city) {
     })
 
 }
+function displayLocalS() {
+    var localS = JSON.parse(localStorage.getItem("weatherAPI")) || []
+    var localHTML = ""
+    for (var i = 0; i < localS; i++) {
+        localHTML += `<button class="btn btn-primary">${localS[i]}</button>` // a = a+1 a+= 1
+     }
+   document.querySelector(".storage").innerHTML = localHTML
+
+}
 //function at the end of 
+displayLocalS()
