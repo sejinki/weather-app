@@ -24,7 +24,7 @@ searchButton.addEventListener("click", function () {
 
 
 function cityWeather(city) {
-    var geoLocation = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&appid=0a9af93029210912aafc391ead4bc3e3"
+    var geoLocation = "https://api.openweathermap.org/geo/1.0/direct?q=" + city + "&appid=0a9af93029210912aafc391ead4bc3e3"
     fetch(geoLocation).then(function (response) {
         return response.json()
     }).then(function (data) {
