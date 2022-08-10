@@ -1,16 +1,26 @@
 var searchButton = document.querySelector(".search-btn");
+var historyButton = document.querySelector(".local-s");
 var apiKey = "0a9af93029210912aafc391ead4bc3e3"
 
 searchButton.addEventListener("click", function () {
 
     var searchTerm = document.querySelector(".weather-search").value
     console.log(searchTerm);
-    cityWeather(searchTerm);
+    cityWeather(searchTerm.toLowerCase());
     var localS = JSON.parse(localStorage.getItem("weatherAPI")) || []
-    localS.push(searchTerm)
+    console.log(localS);
+    if (!localS.includes(searchTerm.toLowerCase())&& searchTerm.length > 0){
+        console.log(true)
+        localS.push(searchTerm)
+    }
     localStorage.setItem("weatherAPI", JSON.stringify(localS))
     displayLocalS()
 })
+// console.log(historyButton)
+// historyButton.addEventListener("click", function (e) {
+
+//     console.log(e)
+// })
 
 
 function cityWeather(city) {
@@ -34,7 +44,7 @@ function cityWeather(city) {
                 currentHTML.innerHTML = `
                 <div class="alert alert-info" role="alert">
                 <h2 class="city">${city}</h2>
-            <h2 class="temp">${data.current.temp}</h2>
+            <h2 class="temp">Temp: ${data.current.temp}</h2>
             <img src="https://openweathermap.org/img/wn/${data.current.weather[0].icon}@2x.png" alt="" class="icon" />
             <div class="description">Description: ${data.current.weather[0].description}</div>
             <div class="humidity">Humidity: ${data.current.humidity}</div>
@@ -67,13 +77,20 @@ function cityWeather(city) {
 
 }
 function displayLocalS() {
+    console.log("111111111111111");
     var localS = JSON.parse(localStorage.getItem("weatherAPI")) || []
+    console.log(localS)
     var localHTML = ""
-    for (var i = 0; i < localS; i++) {
-        localHTML += `<button class="btn btn-primary">${localS[i]}</button>` // a = a+1 a+= 1
+    for (var i = 0; i < localS.length; i++) {
+        localHTML += `<button class="btn btn-primary local-s">${localS[i]}</button>` // a = a+1 a+= 1
      }
    document.querySelector(".storage").innerHTML = localHTML
 
 }
 //function at the end of 
 displayLocalS()
+
+historyButton.addEventListener("click", function (e) {
+
+    console.log(e)
+})
